@@ -10,7 +10,7 @@ import {
   useDelete,
   useFetch,
   useGetPage,
-  useInvalidate,
+  useInvalidateQueries,
   useLoadMore,
   usePost,
   useUpdate,
@@ -72,13 +72,13 @@ export const useDeletePost = () => {
 // [POST] /api/posts/test/{count}
 export const useCreateTestPosts = (count: number) => {
   return usePost(`${toUrl(ApiRoutes.Post)}/test/${count}`, undefined, {
-    onSuccess: useInvalidate(toUrl(ApiRoutes.Post)),
+    onSuccess: useInvalidateQueries(toUrl(ApiRoutes.Post)),
   });
 };
 
 // [DELETE] /api/posts/test/reset
 export const useResetTestPosts = () => {
   return usePost(`${toUrl(ApiRoutes.Post)}/test/reset`, undefined, {
-    onSuccess: useInvalidate(toUrl(ApiRoutes.Post)),
+    onSuccess: useInvalidateQueries(toUrl(ApiRoutes.Post)),
   });
 };

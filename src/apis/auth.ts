@@ -1,14 +1,21 @@
 import { ApiRoutes } from "@/constants";
 import { Nullable } from "@/types";
 import { toUrl } from "@/utils";
-import { Api, User, useFetch, useInvalidate, usePost } from ".";
+import {
+  Api,
+  User,
+  useFetch,
+  useInvalidateQueries,
+  usePost,
+  useResetQueries,
+} from ".";
 
 export interface AuthSignin {
   email: User["email"];
 }
 
 export const useSignin = () => {
-  const invalidate = useInvalidate(toUrl(ApiRoutes.Me));
+  const invalidate = useInvalidateQueries(toUrl(ApiRoutes.Me));
   return usePost<unknown, AuthSignin, string>(
     toUrl(ApiRoutes.Signin),
     undefined,
@@ -23,10 +30,10 @@ export const useSignin = () => {
 };
 
 export const useSignout = () => {
-  const invalidate = useInvalidate(toUrl(ApiRoutes.Me));
+  const reset = useResetQueries(toUrl(ApiRoutes.Me));
   return () => {
     Api.removeToken();
-    invalidate();
+    reset();
   };
 };
 

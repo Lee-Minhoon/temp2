@@ -19,6 +19,8 @@ const Authenticator = ({ children }: AuthenticatorProps) => {
   const { openAlert } = useModalStore(["openAlert", "closeAlert"]);
   const { t } = useTranslation();
 
+  console.log("me?", me);
+
   useEffect(() => {
     if (
       isWhiteList(location.pathname) ||

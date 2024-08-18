@@ -10,7 +10,7 @@ import {
   useDelete,
   useFetch,
   useGetPage,
-  useInvalidate,
+  useInvalidateQueries,
   useLoadMore,
   usePost,
   useUpdate,
@@ -131,13 +131,13 @@ export const useApproveUser = (params?: object) => {
 // [POST] /api/users/test/{count}
 export const useCreateTestUsers = (count: number) => {
   return usePost(`${toUrl(ApiRoutes.CreateTestUsers, { count })}`, undefined, {
-    onSuccess: useInvalidate(toUrl(ApiRoutes.User)),
+    onSuccess: useInvalidateQueries(toUrl(ApiRoutes.User)),
   });
 };
 
 // [POST] /api/users/test/reset
 export const useResetTestUsers = () => {
   return usePost(`${toUrl(ApiRoutes.User)}/test/reset`, undefined, {
-    onSuccess: useInvalidate(toUrl(ApiRoutes.User)),
+    onSuccess: useInvalidateQueries(toUrl(ApiRoutes.User)),
   });
 };

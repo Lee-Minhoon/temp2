@@ -374,12 +374,22 @@ export const useCommand = <
   );
 };
 
-export const useInvalidate = (url: string, params?: object) => {
+export const useInvalidateQueries = (url: string, params?: object) => {
   const queryClient = useQueryClient();
   const queryKeyToInvalidate = params ? [url, params] : [url];
 
   return () => {
     console.log("The query has been invalidated.", queryKeyToInvalidate);
     queryClient.invalidateQueries(queryKeyToInvalidate);
+  };
+};
+
+export const useResetQueries = (url: string, params?: object) => {
+  const queryClient = useQueryClient();
+  const queryKeyToReset = params ? [url, params] : [url];
+
+  return () => {
+    console.log("The query has been reset.", queryKeyToReset);
+    queryClient.resetQueries(queryKeyToReset);
   };
 };

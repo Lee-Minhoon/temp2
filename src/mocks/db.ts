@@ -23,8 +23,7 @@ export const readDB = (): DB => {
 };
 
 export const writeDB = (next: React.SetStateAction<DB>): DB => {
-  const db = readDB();
-  const updated = typeof next === "function" ? next(db) : next;
+  const updated = typeof next === "function" ? next(readDB()) : next;
   localStorage.setItem("db", JSON.stringify(updated));
   return updated;
 };
